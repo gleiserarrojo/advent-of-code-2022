@@ -81,6 +81,16 @@ void printSumThreeBiggest(list *l){
     printf("Sum 3 biggest: %ld\n", total);
 }
 
+void freeList(list *l){
+    node *head;
+    for (unsigned int i = 0; i < l->size; i++) {
+        head = l->head;
+        l->head = l->head->next;
+        free(head);
+    }
+    
+}
+
 int main(){
     list l;
     l.bigger = NULL;
@@ -114,6 +124,7 @@ int main(){
             memset(string, 0, 20);
         }
 
+        printf("\nlist size: %d\n", l.size);
         printBigger(&l);
         printSumThreeBiggest(&l);
     }
@@ -121,6 +132,7 @@ int main(){
         printf("empty file :/\n");
     }
 
+    freeList(&l);
     fclose(file);
     return 0;
 }
